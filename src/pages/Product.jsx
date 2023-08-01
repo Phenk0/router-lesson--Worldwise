@@ -1,8 +1,10 @@
-import styles from "./Product.module.css";
+import styles from './Product.module.css';
+import PageNav from '../components/PageNav.jsx';
 
-export default function Product() {
+function Product() {
   return (
     <main className={styles.product}>
+      <PageNav />
       <section>
         <img
           src="img-1.jpg"
@@ -26,3 +28,4 @@ export default function Product() {
     </main>
   );
 }
+export default Product;
