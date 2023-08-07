@@ -1,4 +1,4 @@
-import { useCities } from '../contexts/CitiesContext.jsx';
+import { useCities } from '../hooks/useCities.js';
 
 import CityItem from './CityItem.jsx';
 import Spinner from './Spinner.jsx';

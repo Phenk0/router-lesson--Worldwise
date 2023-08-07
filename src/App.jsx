@@ -15,6 +15,8 @@ import CountryList from './components/CountryList.jsx';
 import City from './components/City.jsx';
 import Form from './components/Form.jsx';
 import { CitiesProvider } from './contexts/CitiesContext.jsx';
+import { AuthProvider } from './contexts/FakeAuthContext.jsx';
+import ProtectedRoute from './pages/ProtectedRoute.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -27,7 +29,11 @@ function App() {
     { path: 'login', Component: Login },
     {
       path: 'app',
-      Component: AppLayout,
+      element: (
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
+      ),
       children: [
         { index: true, element: <Navigate to="cities" replace /> },
         {
@@ -46,9 +52,11 @@ function App() {
   ]);
 
   return (
-    <CitiesProvider>
-      <RouterProvider router={router} />
-    </CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
+        <RouterProvider router={router} />
+      </CitiesProvider>
+    </AuthProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useCities } from '../contexts/CitiesContext.jsx';
+import { useCities } from '../hooks/useCities.js';
 
 import Message from './Message.jsx';
 import CountryItem from './CountryItem.jsx';

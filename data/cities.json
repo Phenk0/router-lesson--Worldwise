@@ -95,6 +95,54 @@
         "lng": 33.49182128906251
       },
       "id": 98443205
+    },
+    {
+      "cityName": "Chandai",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2023-08-07",
+      "notes": "",
+      "position": {
+        "lat": 48.759507907780154,
+        "lng": 0.7470703125000001
+      },
+      "id": 98443206
+    },
+    {
+      "cityName": "Yerres",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2023-08-07",
+      "notes": "",
+      "position": {
+        "lat": 48.73201942996266,
+        "lng": 2.4829101562500004
+      },
+      "id": 98443207
+    },
+    {
+      "cityName": "Overijse",
+      "country": "Belgium",
+      "emoji": "🇧🇪",
+      "date": "2023-08-07",
+      "notes": "",
+      "position": {
+        "lat": 50.76300205143747,
+        "lng": 4.548339843750001
+      },
+      "id": 98443208
+    },
+    {
+      "cityName": "Greater London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2023-08-07",
+      "notes": "",
+      "position": {
+        "lat": 51.4516761108743,
+        "lng": 0
+      },
+      "id": 98443209
     }
   ]
 }

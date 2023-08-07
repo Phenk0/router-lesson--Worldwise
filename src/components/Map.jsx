@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCities } from '../contexts/CitiesContext.jsx';
+import { useCities } from '../hooks/useCities.js';
 import { useGeolocation } from '../hooks/useGeolocation.js';
 import {
   useMap,

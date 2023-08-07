@@ -1,18 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PageNav from '../components/PageNav.jsx';
 
 import styles from './Login.module.css';
+import { useAuth } from '../hooks/useAuth.js';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button.jsx';
 
 export default function Login() {
-  // PRE-FILL FOR DEV PURPOSES
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('jack@example.com');
   const [password, setPassword] = useState('qwerty');
 
+  useEffect(() => {
+    if (isAuthenticated) navigate('/app', { replace: true });
+  }, [isAuthenticated, navigate]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (email && login) login(email, password);
+  }
   return (
     <main className={styles.login}>
       <PageNav />
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -20,6 +32,7 @@ export default function Login() {
             id="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            autoComplete="email"
           />
         </div>
 
@@ -30,11 +43,12 @@ export default function Login() {
             id="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            autoComplete="current-password"
           />
         </div>
 
         <div>
-          <button>Login</button>
+          <Button type="primary">Login</Button>
         </div>
       </form>
     </main>
