@@ -1,10 +1,13 @@
+import { useCities } from '../contexts/CitiesContext.jsx';
+
 import Message from './Message.jsx';
 import CountryItem from './CountryItem.jsx';
 import Spinner from './Spinner.jsx';
 
 import styles from './CountryList.module.css';
 
-function CountryList({ isLoading, cities }) {
+function CountryList() {
+  const { isLoading, cities } = useCities();
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
@@ -16,7 +19,7 @@ function CountryList({ isLoading, cities }) {
     if (!acc.find((el) => el.country === city.country))
       return [
         ...acc,
-        { country: city.country, emoji: city.emoji, id: city.id },
+        { country: city.country, emoji: city.emoji, id: city.id }
       ];
     else return acc;
   }, []);

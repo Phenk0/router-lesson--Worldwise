@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   createBrowserRouter,
   Navigate,
@@ -15,31 +14,9 @@ import CityList from './components/CityList.jsx';
 import CountryList from './components/CountryList.jsx';
 import City from './components/City.jsx';
 import Form from './components/Form.jsx';
-
-const BASE_URL = 'http://localhost:8000/';
+import { CitiesProvider } from './contexts/CitiesContext.jsx';
 
 function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(`${BASE_URL}cities`);
-        if (!response.ok)
-          throw new Error('Some unknown error in fetching cities');
-        const data = await response.json();
-        setCities(data);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCities();
-  }, []);
-
   const router = createBrowserRouter([
     { path: '/', Component: Homepage },
     {
@@ -55,12 +32,12 @@ function App() {
         { index: true, element: <Navigate to="cities" replace /> },
         {
           path: 'cities',
-          element: <CityList cities={cities} isLoading={isLoading} />
+          Component: CityList
         },
         { path: 'cities/:id', Component: City },
         {
           path: 'countries',
-          element: <CountryList isLoading={isLoading} cities={cities} />
+          Component: CountryList
         },
         { path: 'form', Component: Form }
       ]
@@ -68,8 +45,11 @@ function App() {
     { path: '*', Component: PageNotFound }
   ]);
 
-  console.log(isLoading, cities);
-  return <RouterProvider router={router} />;
+  return (
+    <CitiesProvider>
+      <RouterProvider router={router} />
+    </CitiesProvider>
+  );
 }
 
 export default App;
