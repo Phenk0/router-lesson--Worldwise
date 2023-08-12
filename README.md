@@ -16,4 +16,4 @@ You may also see any lint errors in the console.
 ### `yarn run server`
 
 Runs fake json-server for cities data.\
-Open [http://localhost:8000/questions](http://localhost:8000/cities) to view it in your browser.
+Open [http://localhost:8000/cities](http://localhost:8000/cities) to view it in your browser.

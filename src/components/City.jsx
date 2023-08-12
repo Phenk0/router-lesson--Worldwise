@@ -18,9 +18,10 @@ const formatDate = (date) =>
 function City() {
   const { id } = useParams();
   const { currentCity, getCity, isLoading } = useCities();
+
   useEffect(() => {
     getCity(id);
-  }, [id]);
+  }, [getCity, id]);
 
   if (!currentCity) return 'Fuck!';
   if (isLoading) return <Spinner />;

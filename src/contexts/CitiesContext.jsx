@@ -1,4 +1,6 @@
-import { createContext, useEffect, useReducer } from 'react';
+// noinspection ExceptionCaughtLocallyJS
+
+import { createContext, useCallback, useEffect, useReducer } from 'react';
 
 const BASE_URL = 'http://localhost:8000/';
 
@@ -67,19 +69,22 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
-  async function getCity(id) {
-    if (Number(id) === currentCity.id) return;
+  const getCity = useCallback(
+    async (id) => {
+      if (Number(id) === currentCity.id) return;
 
-    dispatch({ type: 'loading' });
-    try {
-      const response = await fetch(`${BASE_URL}cities/${id}`);
-      if (!response.ok) throw new Error('There was an error loading data...');
-      const data = await response.json();
-      dispatch({ type: 'city/loaded', payload: data });
-    } catch (error) {
-      dispatch({ type: 'rejected', payload: error.message });
-    }
-  }
+      dispatch({ type: 'loading' });
+      try {
+        const response = await fetch(`${BASE_URL}cities/${id}`);
+        if (!response.ok) throw new Error('There was an error loading data...');
+        const data = await response.json();
+        dispatch({ type: 'city/loaded', payload: data });
+      } catch (error) {
+        dispatch({ type: 'rejected', payload: error.message });
+      }
+    },
+    [currentCity.id]
+  );
   async function createCity(newCity) {
     dispatch({ type: 'loading' });
     try {
